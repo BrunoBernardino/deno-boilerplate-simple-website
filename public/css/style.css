@@ -1,0 +1,288 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/* Variables */
+
+:root {
+  --color-background: #f4f4f4;
+  --color-text: #222222;
+  --color-link: #3c1143;
+  --color-link-hover: #c25178;
+  --max-width: 1024px;
+  --min-width: 320px;
+}
+
+/* Base/Custom */
+
+html,
+body {
+  font: 16px/16px 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell',
+    'Fira Sans', 'Droid Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  background: var(--color-background);
+  background-size: cover;
+  color: var(--color-text);
+}
+
+a {
+  color: var(--color-link);
+  text-decoration: underline;
+  transition: all 80ms ease-in;
+}
+
+a:hover,
+a:focus {
+  text-decoration: none;
+  color: var(--color-link-hover);
+}
+
+h1, h2, h3, strong {
+  font-weight: bold;
+}
+
+.wrapper {
+  margin: 0 auto;
+  display: block;
+  max-width: var(--max-width);
+  min-width: var(--min-width);
+  min-height: 100vh;
+}
+
+header {
+  display: block;
+  text-align: center;
+  padding: 1.3rem 0;
+}
+
+@media only screen and (min-width : 600px) {
+  header {
+    display: flex;
+    flex: 1;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+header h1 {
+  font-size: 3rem;
+  line-height: 3rem;
+  font-weight: 100;
+}
+
+header h1 a {
+  text-decoration: none;
+}
+
+header nav ul {
+    display: block;
+    margin: 20px auto;
+}
+
+@media only screen and (min-width : 600px) {
+  header nav ul {
+    display: flex;
+    flex: 1;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: flex-end;
+  }
+}
+
+header nav ul li {
+    display: block;
+    margin: 0 0.3rem 0.3rem;
+}
+
+@media only screen and (min-width : 600px) {
+  header nav ul li {
+    margin: 0 0.3rem;
+  }
+}
+
+header nav ul li a {
+  display: block;
+  padding: 0.5rem;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+header nav ul li.active a {
+  color: var(--color-link-hover);
+}
+
+footer {
+  display: block;
+  padding: 2rem 0;
+  margin: 0 auto;
+  text-align: center;
+}
+
+footer nav ul {
+  display: block;
+}
+
+@media only screen and (min-width : 600px) {
+  footer nav ul {
+    display: flex;
+    flex: 1;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+footer nav ul li {
+    margin: 0 auto 2rem;
+}
+
+@media only screen and (min-width : 600px) {
+  footer nav ul li {
+    margin: 0 0 1rem;
+  }
+
+  footer nav ul li:after {
+    content: '/';
+    display: inline-block;
+    margin: 0 2rem;
+    font-weight: 300;
+  }
+}
+
+footer nav ul li:last-child:after {
+  display: none;
+}
+
+footer nav ul li a {
+  text-decoration: none;
+  font-weight: bold;
+}
+
+footer h3 {
+  font-size: 0.8rem;
+  line-height: 1rem;
+  font-weight: 300;
+  margin-top: 3rem;
+}
+
+@media only screen and (min-width : 600px) {
+  footer h3 {
+    margin-top: 1rem;
+  }
+}
+
+footer h3 a {
+  text-decoration: none;
+}
+
+#loading {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  z-index: 10000;
+  background: transparent;
+  transition: all 200ms ease-in-out;
+  visibility: visible;
+  opacity: 1;
+}
+
+#loading svg path,
+#loading svg rect {
+  fill: rgba(0, 0, 0, 0.8);
+}
+
+#loading.hide {
+  opacity: 0;
+  visibility: hidden;
+}
+
+button {
+  margin: 1rem auto;
+  padding: 1rem 1.5rem;
+  font-size: 1.2rem;
+  border: none;
+  border-radius: 3px;
+  color: #fff;
+  background: var(--color-link);
+  cursor: pointer;
+}
+
+button:hover,
+button:active,
+button:focus {
+  background: var(--color-link-hover);
+}
+
+/* Index */
+.main-section {
+  margin: 2rem auto;
+  padding-bottom: 2rem;
+  border-bottom: 5px solid var(--color-link-hover);
+}
+.main-section:last-of-type {
+  border: none;
+}
+
+.main-section p {
+  font-size: 1rem;
+  line-height: 1.7rem;
+  margin-bottom: 1rem;
+}
+
+.main-title {
+  font-size: 1.5rem;
+  line-height: 2rem;
+  margin-bottom: 2rem;
+  font-weight: 500;
+}
