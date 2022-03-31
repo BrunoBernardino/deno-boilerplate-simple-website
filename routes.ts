@@ -1,4 +1,4 @@
-import { readableStreamFromReader } from 'https://deno.land/std@0.130.0/streams/mod.ts';
+import { readableStreamFromReader } from 'https://deno.land/std@0.132.0/streams/mod.ts';
 import { basicLayoutResponse, generateRandomPositiveInt, isRunningLocally, PageContentResult } from './lib/utils.ts';
 
 // NOTE: This won't be necessary once https://github.com/denoland/deploy_feedback/issues/1 is closed

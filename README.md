@@ -16,7 +16,7 @@ You can build pretty complex and complicated things without frameworks or loads 
 
 ## Requirements
 
-This was tested with `deno@1.20.1`, though it's possible older versions might work.
+This was tested with `deno@1.20.3`, though it's possible older versions might work.
 
 There are no other dependencies. **Deno**!
 
@@ -37,7 +37,7 @@ Everything else can be structured differently.
 
 ## Deployment
 
-Just push to the `main` branch. Any other branch will create a preview deployment.
+- Deno Deploy: Just push to the `main` branch. Any other branch will create a preview deployment.
 
 ## TODOs
 
