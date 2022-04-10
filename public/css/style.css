@@ -264,6 +264,115 @@ button:focus {
   background: var(--color-link-hover);
 }
 
+fieldset {
+  display: block;
+  padding: 2rem;
+  border: none;
+  margin: 2rem 0;
+  border-radius: 3px;
+  background: #fff;
+  transition: all 100ms ease-in-out;
+  box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+}
+
+fieldset > label {
+  font-size: 1rem;
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+}
+
+fieldset > label.checkbox {
+  cursor: pointer;
+  display: inline-block;
+}
+
+fieldset input[type="text"],
+fieldset input[type="date"],
+fieldset input[type="datetime"],
+fieldset input[type="email"],
+fieldset input[type="number"],
+fieldset input[type="search"],
+fieldset input[type="time"],
+fieldset input[type="url"],
+fieldset input[type="password"],
+fieldset textarea,
+fieldset select {
+  box-sizing: border-box;
+  width: 100%;
+  display: block;
+  outline: none;
+  border: none;
+  height: 2.5rem;
+  line-height: 2.5rem;
+  font-size: 1.1rem;
+  padding: 0.5rem 1rem;
+  border: 1px solid #fff;
+  background: #fff;
+  border-radius: 3px;
+  transition: all 80ms ease-in-out;
+}
+
+fieldset input[type="text"]:focus,
+fieldset input[type="date"]:focus,
+fieldset input[type="datetime"]:focus,
+fieldset input[type="email"]:focus,
+fieldset input[type="number"]:focus,
+fieldset input[type="search"]:focus,
+fieldset input[type="time"]:focus,
+fieldset input[type="url"]:focus,
+fieldset input[type="password"]:focus,
+fieldset textarea:focus,
+fieldset select:focus {
+  border-color: var(--color-link-hover);
+}
+
+fieldset textarea {
+  min-height: 10rem;
+  resize: vertical;
+}
+
+.error,
+.success,
+.warning {
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  border-radius: 3px;
+  border-bottom: 3px solid rgb(161, 0, 0);
+  color: var(--color-text);
+  background-image: linear-gradient(rgb(255, 166, 166), #faa);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, .3);
+}
+
+.success {
+  border-color: rgb(0, 161, 0);
+  background-image: linear-gradient(rgb(166, 255, 166), #afa);
+}
+
+.warning {
+  border-color: rgb(161, 158, 0);
+  background-image: linear-gradient(rgb(251, 255, 170), rgb(245, 245, 133));
+}
+
+.error h3,
+.success h3,
+.warning h3,
+.error p,
+.success p,
+.warning p {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: var(--color-text);
+  margin-bottom: 1rem;
+}
+
+.error p,
+.success p,
+.warning p {
+  font-size: 1rem;
+  font-weight: normal;
+}
+
 /* Index */
 .main-section {
   margin: 2rem auto;

@@ -57,12 +57,23 @@ export function basicLayoutResponse(htmlContent: string, options: BasicLayoutOpt
   return new Response(basicLayout(htmlContent, options), {
     headers: {
       'content-type': 'text/html',
+      'content-security-policy':
+        'default-src \'self\'; child-src \'none\'; img-src \'self\' https://*.usefathom.com; style-src \'self\' \'unsafe-inline\'; script-src \'self\' \'unsafe-inline\' https://*.usefathom.com;',
     },
   });
 }
 
 export function isRunningLocally(urlPatternResult: URLPatternResult) {
   return urlPatternResult.hostname.input === 'localhost';
+}
+
+export function escapeHtml(unsafe: string) {
+  return unsafe.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;')
+    .replaceAll('\'', '&#039;');
+}
+
+export function escapeInput(unsafe: string) {
+  return unsafe.replaceAll('"', '\\"');
 }
 
 export function generateRandomPositiveInt(max = 10000) {

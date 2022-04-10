@@ -16,7 +16,7 @@ You can build pretty complex and complicated things without frameworks or loads 
 
 ## Requirements
 
-This was tested with `deno@1.20.3`, though it's possible older versions might work.
+This was tested with `deno@1.20.5`, though it's possible older versions might work.
 
 There are no other dependencies. **Deno**!
 
@@ -43,6 +43,6 @@ Everything else can be structured differently.
 
 Here are some things you will likely want to change before "publishing" this, or after cloning it:
 
-- [ ] Analytics code (`usefathom.com`) in `lib/utils.ts`
+- [ ] Analytics code (`usefathom.com`), default meta tags, and `content-security-policy` in `lib/utils.ts`
 - [ ] Title, description, and links in this `README.md` file
 - [ ] `robots.txt` and `sitemap.xml` files

@@ -1,4 +1,4 @@
-import { readableStreamFromReader } from 'https://deno.land/std@0.132.0/streams/mod.ts';
+import { readableStreamFromReader } from 'https://deno.land/std@0.134.0/streams/mod.ts';
 import { basicLayoutResponse, generateRandomPositiveInt, isRunningLocally, PageContentResult } from './lib/utils.ts';
 
 // NOTE: This won't be necessary once https://github.com/denoland/deploy_feedback/issues/1 is closed
@@ -26,16 +26,25 @@ interface Routes {
 function createBasicRouteHandler(id: string, pathname: string) {
   return {
     pattern: new URLPattern({ pathname }),
-    handler: async (_request: Request, match: URLPatternResult) => {
+    handler: async (request: Request, match: URLPatternResult) => {
       try {
         // NOTE: Use this instead once https://github.com/denoland/deploy_feedback/issues/1 is closed
         // const { pageContent } = await import(`./pages/${id}.ts`);
 
         // @ts-ignore necessary because of the comment above
-        const { pageContent } = pages[id];
+        const { pageContent, pageAction } = pages[id];
 
-        const { htmlContent: htmlContent, titlePrefix } =
-          (await pageContent(match.pathname.groups) as PageContentResult);
+        if (request.method !== 'GET') {
+          return pageAction(request, match) as Response;
+        }
+
+        const pageContentResult = await pageContent(request, match);
+
+        if (pageContentResult instanceof Response) {
+          return pageContentResult;
+        }
+
+        const { htmlContent: htmlContent, titlePrefix } = (pageContentResult as PageContentResult);
 
         return basicLayoutResponse(htmlContent, { currentPath: match.pathname.input, titlePrefix });
       } catch (error) {

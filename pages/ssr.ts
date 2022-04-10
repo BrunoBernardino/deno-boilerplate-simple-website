@@ -1,5 +1,9 @@
 import { generateRandomPositiveInt, html, PageContentResult } from '../lib/utils.ts';
 
+export function pageAction() {
+  return new Response('Not Implemented', { status: 501 });
+}
+
 export function pageContent() {
   const initialCounterValue = generateRandomPositiveInt(10);
 
