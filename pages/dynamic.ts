@@ -1,4 +1,4 @@
-import { basicLayoutResponse, escapeHtml, escapeInput, html, PageContentResult } from '../lib/utils.ts';
+import { basicLayoutResponse, escapeHtml, html, PageContentResult } from '../lib/utils.ts';
 
 export async function pageAction(request: Request, match: URLPatternResult) {
   if (request.method !== 'POST') {
@@ -11,6 +11,8 @@ export async function pageAction(request: Request, match: URLPatternResult) {
   try {
     const formData = await request.formData();
     submittedRandomValue = (formData.get('randomValue') as string).toLocaleLowerCase().trim();
+
+    console.log(submittedRandomValue);
 
     if (!submittedRandomValue) {
       throw new Error('A random value is required');
@@ -78,7 +80,7 @@ function generateHtmlContent(notificationHtml = '', randomValue = '') {
         <fieldset>
           <label for="randomValue">Random Value</label>
           <input id="randomValue" name="randomValue" type="text" placeholder="something" value="${
-    escapeInput(randomValue)
+    escapeHtml(randomValue)
   }" />
         </fieldset>
         <button type="submit">Submit this!</button>

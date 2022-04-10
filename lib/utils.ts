@@ -72,10 +72,6 @@ export function escapeHtml(unsafe: string) {
     .replaceAll('\'', '&#039;');
 }
 
-export function escapeInput(unsafe: string) {
-  return unsafe.replaceAll('"', '\\"');
-}
-
 export function generateRandomPositiveInt(max = 10000) {
   return Math.floor(Math.random() * max);
 }
