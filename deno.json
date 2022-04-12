@@ -1,4 +1,9 @@
 {
+  "tasks": {
+    "start": "deno run --watch --allow-net --allow-read=public,pages --allow-env=PORT main.ts",
+    "format": "deno fmt",
+    "test": "deno fmt --check && deno lint && deno test --allow-net --allow-read=public,pages --allow-env=PORT"
+  },
   "fmt": {
     "options": {
       "useTabs": false,
