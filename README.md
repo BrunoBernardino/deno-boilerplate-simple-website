@@ -23,9 +23,9 @@ There are no other dependencies. **Deno**!
 ## Development
 
 ```sh
-$ make start
-$ make format
-$ make test
+$ deno task start
+$ deno task format
+$ deno task test
 ```
 
 ## Structure
