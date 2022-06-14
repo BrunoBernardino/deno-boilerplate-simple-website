@@ -1,4 +1,4 @@
-import { assertEquals } from 'https://deno.land/std@0.134.0/testing/asserts.ts';
+import { assertEquals } from 'https://deno.land/std@0.142.0/testing/asserts.ts';
 import { escapeHtml, generateRandomPositiveInt } from './utils.ts';
 
 Deno.test('that generateRandomPositiveInt works', () => {
