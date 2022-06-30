@@ -12,7 +12,7 @@ This right here is vanilla. It's very easy to update and maintain.
 
 It's meant to have no extra dependencies, builders, packagers, bundlers, or pre/post-processors. Just vanilla stuff.
 
-You can build pretty complex and complicated things without frameworks or loads of dependencies, but if you need a framework, I'd suggest you try [fresh](https://fresh.deno.dev/) or [Snel](https://crewdevio.mod.land/projects/Snel) to still be able to enjoy a lot of Deno. They're pretty nice.
+You can build pretty complex and complicated things without frameworks or loads of dependencies, but if you need a framework, I'd suggest you try [fresh](https://fresh.deno.dev/), [Snel](https://crewdevio.mod.land/projects/Snel), or [Aleph](https://github.com/alephjs/aleph.js) to still be able to enjoy a lot of Deno. They're pretty nice.
 
 ## Requirements
 
@@ -23,9 +23,9 @@ There are no other dependencies. **Deno**!
 ## Development
 
 ```sh
-$ deno task start
-$ deno task format
-$ deno task test
+$ make start
+$ make format
+$ make test
 ```
 
 ## Structure
@@ -43,6 +43,6 @@ Everything else can be structured differently.
 
 Here are some things you will likely want to change before "publishing" this, or after cloning it:
 
-- [ ] Analytics code (`usefathom.com`), default meta tags, and `content-security-policy` in `lib/utils.ts`
+- [ ] `baseUrl` (also used in server-side analytics via [Plausible](https://plausible.io)), `defaultTitle`, `defaultDescription`, and `content-security-policy` in `lib/utils.ts`
 - [ ] Title, description, and links in this `README.md` file
 - [ ] `robots.txt` and `sitemap.xml` files

@@ -1,5 +1,11 @@
-import { readableStreamFromReader } from 'https://deno.land/std@0.134.0/streams/mod.ts';
-import { basicLayoutResponse, generateRandomPositiveInt, isRunningLocally, PageContentResult } from './lib/utils.ts';
+import { readableStreamFromReader } from 'https://deno.land/std@0.142.0/streams/mod.ts';
+import {
+  basicLayoutResponse,
+  generateRandomPositiveInt,
+  isRunningLocally,
+  PageContentResult,
+  recordPageView,
+} from './lib/utils.ts';
 
 // NOTE: This won't be necessary once https://github.com/denoland/deploy_feedback/issues/1 is closed
 import * as indexPage from './pages/index.ts';
@@ -33,6 +39,8 @@ function createBasicRouteHandler(id: string, pathname: string) {
 
         // @ts-ignore necessary because of the comment above
         const { pageContent, pageAction } = pages[id];
+
+        recordPageView(match.pathname.input);
 
         if (request.method !== 'GET') {
           return pageAction(request, match) as Response;

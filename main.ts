@@ -22,6 +22,4 @@ export const abortController = new AbortController();
 
 const PORT = Deno.env.get('PORT') || 8000;
 
-console.log(`Listening on http://localhost:${PORT}`);
-
 serve(handler, { port: PORT as number, signal: abortController.signal });

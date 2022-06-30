@@ -11,4 +11,4 @@ jobs:
         with:
           deno-version: v1.22.0
       - run: |
-          deno task test
+          make test

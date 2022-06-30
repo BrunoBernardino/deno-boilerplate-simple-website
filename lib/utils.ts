@@ -10,12 +10,23 @@ export interface PageContentResult {
   titlePrefix?: string;
 }
 
+export const baseUrl = 'https://simple-deno-website-boilerplate.onbrn.com';
+export const defaultTitle = 'Simple Deno Website Boilerplate';
+export const defaultDescription = 'Welcome to a Simple Deno Website Boilerplate!';
+
 interface BasicLayoutOptions {
   currentPath: string;
   titlePrefix?: string;
+  description?: string;
 }
 
-function basicLayout(htmlContent: string, { currentPath, titlePrefix }: BasicLayoutOptions) {
+function basicLayout(htmlContent: string, { currentPath, titlePrefix, description }: BasicLayoutOptions) {
+  let title = defaultTitle;
+
+  if (titlePrefix) {
+    title = `${titlePrefix} - Bruno Bernardino`;
+  }
+
   return html`
     <!doctype html>
 
@@ -24,8 +35,8 @@ function basicLayout(htmlContent: string, { currentPath, titlePrefix }: BasicLay
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1">
 
-      <title>${titlePrefix ? `${titlePrefix} - ` : ''}Simple Deno Website Boilerplate</title>
-      <meta name="description" content="${titlePrefix ? `${titlePrefix} - ` : ''}Simple Deno Website Boilerplate">
+      <title>${title}</title>
+      <meta name="description" content="${description || defaultDescription}">
       <meta name="author" content="Bruno Bernardino">
 
       <link rel="icon" href="/public/images/favicon.ico">
@@ -43,11 +54,6 @@ function basicLayout(htmlContent: string, { currentPath, titlePrefix }: BasicLay
         ${footer()}
       </section>
       <script src="/public/js/script.js" defer></script>
-      <script
-        src="https://cdn.usefathom.com/script.js"
-        site="KUHVJOKD"
-        defer
-      ></script>
     </body>
     </html>
     `;
@@ -56,9 +62,10 @@ function basicLayout(htmlContent: string, { currentPath, titlePrefix }: BasicLay
 export function basicLayoutResponse(htmlContent: string, options: BasicLayoutOptions) {
   return new Response(basicLayout(htmlContent, options), {
     headers: {
-      'content-type': 'text/html',
+      'content-type': 'text/html; charset=utf-8',
       'content-security-policy':
-        'default-src \'self\'; child-src \'none\'; img-src \'self\' https://*.usefathom.com; style-src \'self\' \'unsafe-inline\'; script-src \'self\' \'unsafe-inline\' https://*.usefathom.com;',
+        'default-src \'self\'; child-src \'none\'; img-src \'self\'; style-src \'self\' \'unsafe-inline\'; script-src \'self\' \'unsafe-inline\';',
+      'x-frame-options': 'DENY',
     },
   });
 }
@@ -74,4 +81,23 @@ export function escapeHtml(unsafe: string) {
 
 export function generateRandomPositiveInt(max = 10000) {
   return Math.floor(Math.random() * max);
+}
+
+export async function recordPageView(pathname: string) {
+  try {
+    await fetch('https://plausible.io/api/event', {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json; charset=utf-8',
+      },
+      body: JSON.stringify({
+        domain: baseUrl.replace('https://', ''),
+        name: 'pageview',
+        url: `${baseUrl}${pathname}`,
+      }),
+    });
+  } catch (error) {
+    console.log('Failed to log pageview');
+    console.error(error);
+  }
 }
