@@ -85,7 +85,7 @@ export function generateRandomPositiveInt(max = 10000) {
 
 export async function recordPageView(pathname: string) {
   try {
-    await fetch('https://plausible.io/api/event', {
+    await fetch('https://stats.onbrn.com/api/event', {
       method: 'POST',
       headers: {
         'content-type': 'application/json; charset=utf-8',

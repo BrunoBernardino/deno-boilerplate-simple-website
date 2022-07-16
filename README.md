@@ -43,6 +43,6 @@ Everything else can be structured differently.
 
 Here are some things you will likely want to change before "publishing" this, or after cloning it:
 
-- [ ] `baseUrl` (also used in server-side analytics via [Plausible](https://plausible.io)), `defaultTitle`, `defaultDescription`, and `content-security-policy` in `lib/utils.ts`
+- [ ] `baseUrl`, `defaultTitle`, `defaultDescription`, and the analytics code in `recordPageView`, and `content-security-policy` in `lib/utils.ts`
 - [ ] Title, description, and links in this `README.md` file
 - [ ] `robots.txt` and `sitemap.xml` files
