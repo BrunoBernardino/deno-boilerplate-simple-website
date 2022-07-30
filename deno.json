@@ -7,5 +7,13 @@
       "singleQuote": true,
       "proseWrap": "preserve"
     }
+  },
+  "compilerOptions": {
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "dom.asynciterable",
+      "deno.ns"
+    ]
   }
 }

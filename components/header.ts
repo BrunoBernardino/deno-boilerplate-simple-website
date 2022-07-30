@@ -20,6 +20,16 @@ export default function header(currentPath: string) {
               Dynamic
             </a>
           </li>
+          <li class="${currentPath === '/form' ? 'active' : ''}">
+            <a href="/form">
+              Form
+            </a>
+          </li>
+          <li class="${currentPath === '/web-component' ? 'active' : ''}">
+            <a href="/web-component">
+              Web Component
+            </a>
+          </li>
         </ul>
       </nav>
     </header>

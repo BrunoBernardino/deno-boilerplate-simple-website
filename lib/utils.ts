@@ -24,7 +24,7 @@ function basicLayout(htmlContent: string, { currentPath, titlePrefix, descriptio
   let title = defaultTitle;
 
   if (titlePrefix) {
-    title = `${titlePrefix} - Bruno Bernardino`;
+    title = `${titlePrefix} - Simple Deno Website Boilerplate`;
   }
 
   return html`

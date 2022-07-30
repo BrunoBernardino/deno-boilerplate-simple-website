@@ -1,4 +1,4 @@
-import { serve } from 'https://deno.land/std@0.142.0/http/server.ts';
+import { serve } from 'https://deno.land/std@0.149.0/http/server.ts';
 import routes, { Route } from './routes.ts';
 
 function handler(request: Request) {

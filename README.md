@@ -8,15 +8,22 @@ Demo at [simple-deno-website-boilerplate.onbrn.com](https://simple-deno-website-
 
 ## Framework-less
 
-This right here is vanilla. It's very easy to update and maintain.
+This right here is vanilla TypeScript and JavaScript. It's very easy to update and maintain.
 
 It's meant to have no extra dependencies, builders, packagers, bundlers, or pre/post-processors. Just vanilla stuff.
+
+It does include some examples for building complex apps, like:
+
+1. No JS form submission in `/form`
+2. Dynamic client-side updates in `/dynamic` with vanilla JS
+3. Hydration in `/ssr` (when some JS is dynamically created to update the client state once it's finished the initial load) with vanilla JS
+4. Using [Just-In-Time-transpiled-TypeScript](https://github.com/ayame113/ts-serve) [Web Components](https://developer.mozilla.org/en-US/docs/Web/Web_Components) for dynamic client-side updates in `/web-component`
 
 You can build pretty complex and complicated things without frameworks or loads of dependencies, but if you need a framework, I'd suggest you try [fresh](https://fresh.deno.dev/), [Snel](https://crewdevio.mod.land/projects/Snel), or [Aleph](https://github.com/alephjs/aleph.js) to still be able to enjoy a lot of Deno. They're pretty nice.
 
 ## Requirements
 
-This was tested with `deno@1.22.0`, though it's possible older versions might work.
+This was tested with `deno@1.22.3`, though it's possible older versions might work.
 
 There are no other dependencies. **Deno**!
 
@@ -32,6 +39,7 @@ $ make test
 
 - Backend routes are defined at `routes.ts`.
 - Static files are defined at `public/`.
+- Pages are defined at `pages/`.
 
 Everything else can be structured differently.
 

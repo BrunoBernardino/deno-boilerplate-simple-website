@@ -88,9 +88,10 @@ h1, h2, h3, strong {
 .wrapper {
   margin: 0 auto;
   display: block;
-  max-width: var(--max-width);
-  min-width: var(--min-width);
-  min-height: 100vh;
+  max-width: calc(var(--max-width) - 2rem);
+  min-width: calc(var(--min-width) - 2rem);
+  min-height: calc(100vh - 2rem);
+  padding: 1rem;
 }
 
 header {
@@ -247,7 +248,7 @@ footer h3 a {
   visibility: hidden;
 }
 
-button {
+button, .button {
   margin: 1rem auto;
   padding: 1rem 1.5rem;
   font-size: 1.2rem;
@@ -256,11 +257,15 @@ button {
   color: #fff;
   background: var(--color-link);
   cursor: pointer;
+  display: inline-block;
 }
 
 button:hover,
 button:active,
-button:focus {
+button:focus,
+.button:hover,
+.button:active,
+.button:focus {
   background: var(--color-link-hover);
 }
 

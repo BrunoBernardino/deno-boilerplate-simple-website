@@ -1,4 +1,5 @@
-import { readableStreamFromReader } from 'https://deno.land/std@0.142.0/streams/mod.ts';
+import { readableStreamFromReader } from 'https://deno.land/std@0.149.0/streams/mod.ts';
+import { serveFileWithTs } from 'https://deno.land/x/ts_serve@v1.1.0/mod.ts';
 import {
   basicLayoutResponse,
   generateRandomPositiveInt,
@@ -11,10 +12,14 @@ import {
 import * as indexPage from './pages/index.ts';
 import * as ssrPage from './pages/ssr.ts';
 import * as dynamicPage from './pages/dynamic.ts';
+import * as formPage from './pages/form.ts';
+import * as webComponentPage from './pages/web-component.ts';
 const pages = {
   index: indexPage,
   ssr: ssrPage,
   dynamic: dynamicPage,
+  form: formPage,
+  webComponent: webComponentPage,
 };
 
 export interface Route {
@@ -22,7 +27,7 @@ export interface Route {
   handler: (
     request: Request,
     match: URLPatternResult,
-  ) => (Response | Promise<Response>);
+  ) => Response | Promise<Response>;
 }
 
 interface Routes {
@@ -105,11 +110,12 @@ const routes: Routes = {
   },
   public: {
     pattern: new URLPattern({ pathname: '/public/:filePath*' }),
-    handler: async (_request, match) => {
+    handler: async (request, match) => {
       const { filePath } = match.pathname.groups;
 
       try {
-        const file = await Deno.open(`public/${filePath}`, { read: true });
+        const fullFilePath = `public/${filePath}`;
+        const file = await Deno.open(fullFilePath, { read: true });
         const readableStream = readableStreamFromReader(file);
 
         const oneDayInSeconds = isRunningLocally(match) ? 0 : 24 * 60 * 60;
@@ -131,6 +137,8 @@ const routes: Routes = {
           headers['content-type'] = 'image/png';
         } else if (fileExtension === 'svg') {
           headers['content-type'] = 'image/svg+xml';
+        } else if (fileExtension === 'ts') {
+          return serveFileWithTs(request, fullFilePath);
         }
 
         return new Response(readableStream, {
@@ -150,6 +158,8 @@ const routes: Routes = {
   index: createBasicRouteHandler('index', '/'),
   ssr: createBasicRouteHandler('ssr', '/ssr'),
   dynamic: createBasicRouteHandler('dynamic', '/dynamic'),
+  form: createBasicRouteHandler('form', '/form'),
+  webComponent: createBasicRouteHandler('webComponent', '/web-component'),
   api_v0_random_positive_int: {
     pattern: new URLPattern({ pathname: '/api/v0/random-positive-int' }),
     handler: (_request) => {
