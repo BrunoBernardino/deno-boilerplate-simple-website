@@ -1,5 +1,5 @@
 import { readableStreamFromReader } from 'https://deno.land/std@0.149.0/streams/mod.ts';
-import { serveFileWithTs } from 'https://deno.land/x/ts_serve@v1.0.1/mod.ts';
+import { serveFileWithTs } from 'https://deno.land/x/ts_serve@v1.1.0/mod.ts';
 import {
   basicLayoutResponse,
   generateRandomPositiveInt,
