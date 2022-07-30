@@ -17,7 +17,7 @@ It does include some examples for building complex apps, like:
 1. No JS form submission in `/form`
 2. Dynamic client-side updates in `/dynamic` with vanilla JS
 3. Hydration in `/ssr` (when some JS is dynamically created to update the client state once it's finished the initial load) with vanilla JS
-4. Using [Just-In-Time-transpiled-TypeScript](https://github.com/ayame113/ts-serve) [Web Components](https://developer.mozilla.org/en-US/docs/Web/Web_Components) for dynamic client-side updates in `/web-component`
+4. Using Just-In-Time-transpiled-TypeScript (inspired by [ts-serve](https://github.com/ayame113/ts-serve)) [Web Components](https://developer.mozilla.org/en-US/docs/Web/Web_Components) for dynamic client-side updates in `/web-component`
 
 You can build pretty complex and complicated things without frameworks or loads of dependencies, but if you need a framework, I'd suggest you try [fresh](https://fresh.deno.dev/), [Snel](https://crewdevio.mod.land/projects/Snel), or [Aleph](https://github.com/alephjs/aleph.js) to still be able to enjoy a lot of Deno. They're pretty nice.
 

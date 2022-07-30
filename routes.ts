@@ -138,7 +138,7 @@ const routes: Routes = {
         } else if (fileExtension === 'svg') {
           headers['content-type'] = 'image/svg+xml';
         } else if (fileExtension === 'ts') {
-          return serveFileWithTs(request, fullFilePath);
+          return serveFileWithTs(request, fullFilePath, headers);
         }
 
         return new Response(readableStream, {
