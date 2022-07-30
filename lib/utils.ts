@@ -1,3 +1,6 @@
+import { emit } from "https://deno.land/x/emit@0.4.0/mod.ts";
+import { serveFile } from "https://deno.land/std@0.149.0/http/file_server.ts";
+
 import header from '../components/header.ts';
 import footer from '../components/footer.ts';
 import loading from '../components/loading.ts';
@@ -100,4 +103,33 @@ export async function recordPageView(pathname: string) {
     console.log('Failed to log pageview');
     console.error(error);
   }
+}
+
+async function transpileTs(content: string, specifier: URL) {
+  const urlStr = specifier.toString();
+  const result = await emit(specifier, {
+    load(specifier: string) {
+      if (specifier !== urlStr) {
+        return Promise.resolve({ kind: "module", specifier, content: "" });
+      }
+      return Promise.resolve({ kind: "module", specifier, content });
+    },
+  });
+  return result[urlStr];
+}
+
+export async function serveFileWithTs(request: Request, filePath: string) {
+  const response = await serveFile(request, filePath);
+
+  const tsCode = await response.text();
+  const jsCode = await transpileTs(tsCode, new URL("file:///src.ts"));
+  const { headers } = response;
+  headers.set("content-type", "application/javascript; charset=utf-8");
+  headers.delete("content-length");
+
+  return new Response(jsCode, {
+    status: response.status,
+    statusText: response.statusText,
+    headers,
+  });
 }
