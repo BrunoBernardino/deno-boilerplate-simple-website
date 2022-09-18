@@ -1,5 +1,5 @@
-import { emit } from 'https://deno.land/x/emit@0.4.0/mod.ts';
-import { serveFile } from 'https://deno.land/std@0.149.0/http/file_server.ts';
+import { emit } from 'https://deno.land/x/emit@0.9.0/mod.ts';
+import { serveFile } from 'https://deno.land/std@0.156.0/http/file_server.ts';
 
 import header from '../components/header.ts';
 import footer from '../components/footer.ts';

@@ -1,4 +1,3 @@
-import { readableStreamFromReader } from 'https://deno.land/std@0.149.0/streams/mod.ts';
 import {
   basicLayoutResponse,
   generateRandomPositiveInt,
@@ -79,12 +78,11 @@ const routes: Routes = {
   sitemap: {
     pattern: new URLPattern({ pathname: '/sitemap.xml' }),
     handler: async (_request) => {
-      const file = await Deno.open(`public/sitemap.xml`, { read: true });
-      const readableStream = readableStreamFromReader(file);
+      const fileContents = await Deno.readTextFile(`public/sitemap.xml`);
 
       const oneDayInSeconds = 24 * 60 * 60;
 
-      return new Response(readableStream, {
+      return new Response(fileContents, {
         headers: {
           'content-type': 'application/xml',
           'cache-control': `max-age=${oneDayInSeconds}, public`,
@@ -95,12 +93,11 @@ const routes: Routes = {
   robots: {
     pattern: new URLPattern({ pathname: '/robots.txt' }),
     handler: async (_request) => {
-      const file = await Deno.open(`public/robots.txt`, { read: true });
-      const readableStream = readableStreamFromReader(file);
+      const fileContents = await Deno.readTextFile(`public/robots.txt`);
 
       const oneDayInSeconds = 24 * 60 * 60;
 
-      return new Response(readableStream, {
+      return new Response(fileContents, {
         headers: {
           'content-type': 'text/plain',
           'cache-control': `max-age=${oneDayInSeconds}, public`,
@@ -115,8 +112,7 @@ const routes: Routes = {
 
       try {
         const fullFilePath = `public/${filePath}`;
-        const file = await Deno.open(fullFilePath, { read: true });
-        const readableStream = readableStreamFromReader(file);
+        const fileContents = await Deno.readTextFile(fullFilePath);
 
         const oneDayInSeconds = isRunningLocally(match) ? 0 : 24 * 60 * 60;
 
@@ -141,7 +137,7 @@ const routes: Routes = {
           return serveFileWithTs(request, fullFilePath, headers);
         }
 
-        return new Response(readableStream, {
+        return new Response(fileContents, {
           headers,
         });
       } catch (error) {
