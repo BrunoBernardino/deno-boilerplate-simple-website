@@ -1,3 +1,4 @@
+import { serveFile } from 'https://deno.land/std@0.156.0/http/file_server.ts';
 import {
   basicLayoutResponse,
   generateRandomPositiveInt,
@@ -84,7 +85,7 @@ const routes: Routes = {
 
       return new Response(fileContents, {
         headers: {
-          'content-type': 'application/xml',
+          'content-type': 'application/xml; charset=utf-8',
           'cache-control': `max-age=${oneDayInSeconds}, public`,
         },
       });
@@ -99,7 +100,7 @@ const routes: Routes = {
 
       return new Response(fileContents, {
         headers: {
-          'content-type': 'text/plain',
+          'content-type': 'text/plain; charset=utf-8',
           'cache-control': `max-age=${oneDayInSeconds}, public`,
         },
       });
@@ -112,7 +113,6 @@ const routes: Routes = {
 
       try {
         const fullFilePath = `public/${filePath}`;
-        const fileContents = await Deno.readTextFile(fullFilePath);
 
         const oneDayInSeconds = isRunningLocally(match) ? 0 : 24 * 60 * 60;
 
@@ -129,13 +129,21 @@ const routes: Routes = {
           headers['content-type'] = 'text/css';
         } else if (fileExtension === 'jpg') {
           headers['content-type'] = 'image/jpeg';
+          return serveFile(request, fullFilePath);
         } else if (fileExtension === 'png') {
           headers['content-type'] = 'image/png';
+          return serveFile(request, fullFilePath);
         } else if (fileExtension === 'svg') {
           headers['content-type'] = 'image/svg+xml';
+          return serveFile(request, fullFilePath);
+        } else if (fileExtension === 'ico') {
+          headers['content-type'] = 'image/x-icon';
+          return serveFile(request, fullFilePath);
         } else if (fileExtension === 'ts') {
           return serveFileWithTs(request, fullFilePath, headers);
         }
+
+        const fileContents = await Deno.readTextFile(fullFilePath);
 
         return new Response(fileContents, {
           headers,
