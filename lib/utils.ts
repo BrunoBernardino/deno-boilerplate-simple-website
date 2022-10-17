@@ -121,6 +121,10 @@ async function transpileTs(content: string, specifier: URL) {
 export async function serveFileWithTs(request: Request, filePath: string, extraHeaders?: ResponseInit['headers']) {
   const response = await serveFile(request, filePath);
 
+  if (response.status !== 200) {
+    return response;
+  }
+
   const tsCode = await response.text();
   const jsCode = await transpileTs(tsCode, new URL('file:///src.ts'));
   const { headers } = response;

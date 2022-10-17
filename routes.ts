@@ -2,7 +2,6 @@ import { serveFile } from 'https://deno.land/std@0.156.0/http/file_server.ts';
 import {
   basicLayoutResponse,
   generateRandomPositiveInt,
-  isRunningLocally,
   PageContentResult,
   recordPageView,
   serveFileWithTs,
@@ -108,46 +107,19 @@ const routes: Routes = {
   },
   public: {
     pattern: new URLPattern({ pathname: '/public/:filePath*' }),
-    handler: async (request, match) => {
+    handler: (request, match) => {
       const { filePath } = match.pathname.groups;
 
       try {
         const fullFilePath = `public/${filePath}`;
 
-        const oneDayInSeconds = isRunningLocally(match) ? 0 : 24 * 60 * 60;
-
-        const headers: ResponseInit['headers'] = {
-          'cache-control': `max-age=${oneDayInSeconds}, public`,
-        };
-
-        // NOTE: It would be nice to figure out a better way to deduce content-type without dependencies
         const fileExtension = filePath.split('.').pop()?.toLowerCase();
 
-        if (fileExtension === 'js') {
-          headers['content-type'] = 'text/javascript';
-        } else if (fileExtension === 'css') {
-          headers['content-type'] = 'text/css';
-        } else if (fileExtension === 'jpg') {
-          headers['content-type'] = 'image/jpeg';
-          return serveFile(request, fullFilePath);
-        } else if (fileExtension === 'png') {
-          headers['content-type'] = 'image/png';
-          return serveFile(request, fullFilePath);
-        } else if (fileExtension === 'svg') {
-          headers['content-type'] = 'image/svg+xml';
-          return serveFile(request, fullFilePath);
-        } else if (fileExtension === 'ico') {
-          headers['content-type'] = 'image/x-icon';
-          return serveFile(request, fullFilePath);
-        } else if (fileExtension === 'ts') {
-          return serveFileWithTs(request, fullFilePath, headers);
+        if (fileExtension === 'ts') {
+          return serveFileWithTs(request, fullFilePath);
         }
 
-        const fileContents = await Deno.readTextFile(fullFilePath);
-
-        return new Response(fileContents, {
-          headers,
-        });
+        return serveFile(request, fullFilePath);
       } catch (error) {
         if (error.toString().includes('NotFound')) {
           return new Response('Not Found', { status: 404 });
