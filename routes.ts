@@ -1,4 +1,4 @@
-import { serveFile } from 'https://deno.land/std@0.156.0/http/file_server.ts';
+import { serveFile } from 'https://deno.land/std@0.161.0/http/file_server.ts';
 import {
   basicLayoutResponse,
   generateRandomPositiveInt,
@@ -143,7 +143,7 @@ const routes: Routes = {
 
       return new Response(JSON.stringify({ number }), {
         headers: {
-          'content-type': 'application/json',
+          'content-type': 'application/json; charset=utf-8',
         },
       });
     },

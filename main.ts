@@ -1,4 +1,4 @@
-import { serve } from 'https://deno.land/std@0.156.0/http/server.ts';
+import { serve } from 'https://deno.land/std@0.161.0/http/server.ts';
 import routes, { Route } from './routes.ts';
 
 function handler(request: Request) {
@@ -13,7 +13,7 @@ function handler(request: Request) {
     }
   }
 
-  return new Response('Not found', {
+  return new Response('Not Found', {
     status: 404,
   });
 }

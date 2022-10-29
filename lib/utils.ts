@@ -1,5 +1,5 @@
-import { emit } from 'https://deno.land/x/emit@0.9.0/mod.ts';
-import { serveFile } from 'https://deno.land/std@0.156.0/http/file_server.ts';
+import { emit } from 'https://deno.land/x/emit@0.10.0/mod.ts';
+import { serveFile } from 'https://deno.land/std@0.161.0/http/file_server.ts';
 
 import header from '../components/header.ts';
 import footer from '../components/footer.ts';
@@ -42,7 +42,6 @@ function basicLayout(htmlContent: string, { currentPath, titlePrefix, descriptio
       <meta name="description" content="${description || defaultDescription}">
       <meta name="author" content="Bruno Bernardino">
 
-      <link rel="icon" href="/public/images/favicon.ico">
       <link rel="icon" href="/public/images/favicon.png" type="image/png">
       <link rel="apple-touch-icon" href="/public/images/favicon.png">
 

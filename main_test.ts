@@ -1,4 +1,4 @@
-import { assertEquals } from 'https://deno.land/std@0.156.0/testing/asserts.ts';
+import { assertEquals } from 'https://deno.land/std@0.161.0/testing/asserts.ts';
 import { abortController } from './main.ts';
 
 const baseUrl = 'http://localhost:8000';
@@ -22,7 +22,7 @@ Deno.test({
     assertEquals(response.status, 404);
 
     responseText = await response.text();
-    assertEquals(responseText, 'Not found');
+    assertEquals(responseText, 'Not Found');
 
     abortController.abort('Test finished');
   },
