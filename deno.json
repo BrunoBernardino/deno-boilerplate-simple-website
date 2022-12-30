@@ -15,5 +15,7 @@
       "dom.asynciterable",
       "deno.ns"
     ]
-  }
+  },
+  "importMap": "./import_map.json",
+  "lock": false
 }
