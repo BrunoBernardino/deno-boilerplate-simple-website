@@ -1,5 +1,6 @@
 import { serveFile } from 'std/http/file_server.ts';
 import { emit } from 'https://deno.land/x/emit@0.10.0/mod.ts';
+import sass from 'https://deno.land/x/denosass@1.0.6/mod.ts';
 
 import header from '../components/header.ts';
 import footer from '../components/footer.ts';
@@ -46,6 +47,7 @@ function basicLayout(htmlContent: string, { currentPath, titlePrefix, descriptio
       <link rel="apple-touch-icon" href="/public/images/favicon.png">
 
       <link rel="stylesheet" href="/public/css/style.css">
+      <link rel="stylesheet" href="/public/scss/style.scss">
     </head>
 
     <body>
@@ -85,25 +87,6 @@ export function generateRandomPositiveInt(max = 10000) {
   return Math.floor(Math.random() * max);
 }
 
-export async function recordPageView(pathname: string) {
-  try {
-    await fetch('https://stats.onbrn.com/api/event', {
-      method: 'POST',
-      headers: {
-        'content-type': 'application/json; charset=utf-8',
-      },
-      body: JSON.stringify({
-        domain: baseUrl.replace('https://', ''),
-        name: 'pageview',
-        url: `${baseUrl}${pathname}`,
-      }),
-    });
-  } catch (error) {
-    console.log('Failed to log pageview');
-    console.error(error);
-  }
-}
-
 async function transpileTs(content: string, specifier: URL) {
   const urlStr = specifier.toString();
   const result = await emit(specifier, {
@@ -131,6 +114,33 @@ export async function serveFileWithTs(request: Request, filePath: string, extraH
   headers.delete('content-length');
 
   return new Response(jsCode, {
+    status: response.status,
+    statusText: response.statusText,
+    headers,
+    ...(extraHeaders || {}),
+  });
+}
+
+function transpileSass(content: string) {
+  const compiler = sass(content);
+
+  return compiler.to_string('compressed') as string;
+}
+
+export async function serveFileWithSass(request: Request, filePath: string, extraHeaders?: ResponseInit['headers']) {
+  const response = await serveFile(request, filePath);
+
+  if (response.status !== 200) {
+    return response;
+  }
+
+  const sassCode = await response.text();
+  const cssCode = transpileSass(sassCode);
+  const { headers } = response;
+  headers.set('content-type', 'text/css; charset=utf-8');
+  headers.delete('content-length');
+
+  return new Response(cssCode, {
     status: response.status,
     statusText: response.statusText,
     headers,

@@ -3,7 +3,7 @@ import {
   basicLayoutResponse,
   generateRandomPositiveInt,
   PageContentResult,
-  recordPageView,
+  serveFileWithSass,
   serveFileWithTs,
 } from './lib/utils.ts';
 
@@ -43,10 +43,6 @@ function createBasicRouteHandler(id: string, pathname: string) {
 
         // @ts-ignore necessary because of the comment above
         const { pageContent, pageAction } = pages[id];
-
-        if (!request.url.startsWith('http://localhost')) {
-          recordPageView(match.pathname.input);
-        }
 
         if (request.method !== 'GET') {
           return pageAction(request, match) as Response;
@@ -117,6 +113,8 @@ const routes: Routes = {
 
         if (fileExtension === 'ts') {
           return serveFileWithTs(request, fullFilePath);
+        } else if (fileExtension === 'scss') {
+          return serveFileWithSass(request, fullFilePath);
         }
 
         return serveFile(request, fullFilePath);

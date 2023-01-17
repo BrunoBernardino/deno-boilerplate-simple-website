@@ -18,6 +18,8 @@ It does include some examples for building complex apps, like:
 2. Dynamic client-side updates in `/dynamic` with vanilla JS
 3. Hydration in `/ssr` (when some JS is dynamically created to update the client state once it's finished the initial load) with vanilla JS
 4. Using Just-In-Time-transpiled-TypeScript (inspired by [ts-serve](https://github.com/ayame113/ts-serve)) [Web Components](https://developer.mozilla.org/en-US/docs/Web/Web_Components) for dynamic client-side updates in `/web-component`
+5. Using Just-In-Time-transpiled-SASS for `SCSS` → `CSS` output
+6. Also, if you want to see things like Google Sign-in or GitHub Sign-in, running PostgreSQL database migrations, filling PDFs, sending emails with attachments, or uploading files to AWS S3, I've also published a [Deno Code Examples app](https://deno-code-examples.onbrn.com) and [repo](https://github.com/BrunoBernardino/deno-code-examples).
 
 You can build pretty complex and complicated things without frameworks or loads of dependencies, but if you need a framework, I'd suggest you try [fresh](https://fresh.deno.dev/), [Snel](https://crewdevio.mod.land/projects/Snel), or [Aleph](https://github.com/alephjs/aleph.js) to still be able to enjoy a lot of Deno. They're pretty nice.
 
