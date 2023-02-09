@@ -1,4 +1,4 @@
-import { html, PageContentResult } from '../lib/utils.ts';
+import { html, PageContentResult } from '/lib/utils.ts';
 
 export function pageAction() {
   return new Response('Not Implemented', { status: 501 });

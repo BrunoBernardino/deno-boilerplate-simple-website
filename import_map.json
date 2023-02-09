@@ -3,6 +3,11 @@
     "/": "./",
     "./": "./",
 
+    "react": "https://esm.sh/react@18.2.0",
+    "react/": "https://esm.sh/react@18.2.0/",
+    "react-dom": "https://esm.sh/react-dom@18.2.0",
+    "react-dom/": "https://esm.sh/react-dom@18.2.0/",
+
     "std/": "https://deno.land/std@0.168.0/"
   }
 }

@@ -1,4 +1,4 @@
-import { basicLayoutResponse, escapeHtml, html, PageContentResult } from '../lib/utils.ts';
+import { basicLayoutResponse, escapeHtml, html, PageContentResult } from '/lib/utils.ts';
 
 const titlePrefix = 'Form';
 

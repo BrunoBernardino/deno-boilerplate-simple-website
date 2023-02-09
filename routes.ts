@@ -13,12 +13,14 @@ import * as ssrPage from './pages/ssr.ts';
 import * as dynamicPage from './pages/dynamic.ts';
 import * as formPage from './pages/form.ts';
 import * as webComponentPage from './pages/web-component.ts';
+import * as reactPage from './pages/react.tsx';
 const pages = {
   index: indexPage,
   ssr: ssrPage,
   dynamic: dynamicPage,
   form: formPage,
   webComponent: webComponentPage,
+  react: reactPage,
 };
 
 export interface Route {
@@ -129,11 +131,33 @@ const routes: Routes = {
       }
     },
   },
+  publicComponents: {
+    pattern: new URLPattern({ pathname: '/public-components/:filePath*' }),
+    handler: (request, match) => {
+      const { filePath } = match.pathname.groups;
+
+      try {
+        const fullFilePath = `components/${filePath}`;
+
+        return serveFile(request, fullFilePath);
+      } catch (error) {
+        if (error.toString().includes('NotFound')) {
+          return new Response('Not Found', { status: 404 });
+        }
+
+        console.error(error);
+
+        return new Response('Internal Server Error', { status: 500 });
+      }
+    },
+  },
   index: createBasicRouteHandler('index', '/'),
   ssr: createBasicRouteHandler('ssr', '/ssr'),
   dynamic: createBasicRouteHandler('dynamic', '/dynamic'),
   form: createBasicRouteHandler('form', '/form'),
   webComponent: createBasicRouteHandler('webComponent', '/web-component'),
+  react: createBasicRouteHandler('react', '/react'),
+  reactWithInitialCount: createBasicRouteHandler('react', '/react/:count'),
   api_v0_random_positive_int: {
     pattern: new URLPattern({ pathname: '/api/v0/random-positive-int' }),
     handler: (_request) => {

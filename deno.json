@@ -8,7 +8,17 @@
       "proseWrap": "preserve"
     }
   },
+  "lint": {
+    "rules": {
+      "exclude": [
+        "no-window-prefix"
+      ]
+    }
+  },
   "compilerOptions": {
+    "jsx": "react",
+    "jsxFactory": "React.createElement",
+    "jsxFragmentFactory": "React.Fragment",
     "lib": [
       "dom",
       "dom.iterable",

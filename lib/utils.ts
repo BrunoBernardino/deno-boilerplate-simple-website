@@ -2,9 +2,9 @@ import { serveFile } from 'std/http/file_server.ts';
 import { emit } from 'https://deno.land/x/emit@0.10.0/mod.ts';
 import sass from 'https://deno.land/x/denosass@1.0.6/mod.ts';
 
-import header from '../components/header.ts';
-import footer from '../components/footer.ts';
-import loading from '../components/loading.ts';
+import header from '/components/header.ts';
+import footer from '/components/footer.ts';
+import loading from '/components/loading.ts';
 
 // This allows us to have nice html syntax highlighting in template literals
 export const html = String.raw;
@@ -68,7 +68,7 @@ export function basicLayoutResponse(htmlContent: string, options: BasicLayoutOpt
     headers: {
       'content-type': 'text/html; charset=utf-8',
       'content-security-policy':
-        'default-src \'self\'; child-src \'none\'; img-src \'self\'; style-src \'self\' \'unsafe-inline\'; script-src \'self\' \'unsafe-inline\';',
+        `default-src 'self'; child-src 'none'; img-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'  https://unpkg.com/@babel/standalone@7.20.15/babel.min.js https://unpkg.com/react@18.2.0/umd/react.production.min.js https://unpkg.com/react-dom@18.2.0/umd/react-dom.production.min.js;`,
       'x-frame-options': 'DENY',
     },
   });

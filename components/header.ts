@@ -1,4 +1,4 @@
-import { html } from '../lib/utils.ts';
+import { html } from '/lib/utils.ts';
 
 export default function header(currentPath: string) {
   return html`
@@ -28,6 +28,11 @@ export default function header(currentPath: string) {
           <li class="${currentPath === '/web-component' ? 'active' : ''}">
             <a href="/web-component">
               Web Component
+            </a>
+          </li>
+          <li class="${currentPath.startsWith('/react/') || currentPath === '/react' ? 'active' : ''}">
+            <a href="/react">
+              React
             </a>
           </li>
         </ul>
