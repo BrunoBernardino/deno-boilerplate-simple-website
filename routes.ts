@@ -131,26 +131,6 @@ const routes: Routes = {
       }
     },
   },
-  publicComponents: {
-    pattern: new URLPattern({ pathname: '/public-components/:filePath*' }),
-    handler: (request, match) => {
-      const { filePath } = match.pathname.groups;
-
-      try {
-        const fullFilePath = `components/${filePath}`;
-
-        return serveFile(request, fullFilePath);
-      } catch (error) {
-        if (error.toString().includes('NotFound')) {
-          return new Response('Not Found', { status: 404 });
-        }
-
-        console.error(error);
-
-        return new Response('Internal Server Error', { status: 500 });
-      }
-    },
-  },
   index: createBasicRouteHandler('index', '/'),
   ssr: createBasicRouteHandler('ssr', '/ssr'),
   dynamic: createBasicRouteHandler('dynamic', '/dynamic'),
