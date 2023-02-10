@@ -1,6 +1,4 @@
-import * as React from 'react';
-
-const { useState, useEffect } = React;
+import React, { useEffect, useState } from 'react';
 
 export default function Counter({ initialValue = 0 }: { initialValue?: number }) {
   const [count, setCount] = useState(initialValue);
