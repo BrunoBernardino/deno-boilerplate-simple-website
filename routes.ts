@@ -56,7 +56,7 @@ function createBasicRouteHandler(id: string, pathname: string) {
           return pageContentResult;
         }
 
-        const { htmlContent: htmlContent, titlePrefix } = (pageContentResult as PageContentResult);
+        const { htmlContent: htmlContent, titlePrefix } = pageContentResult as PageContentResult;
 
         return basicLayoutResponse(htmlContent, { currentPath: match.pathname.input, titlePrefix });
       } catch (error) {
