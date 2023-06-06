@@ -50,6 +50,8 @@ header {
   padding: 1.3rem 0;
 
   h1 {
+    margin: 0;
+    padding: 0;
     font-size: 3rem;
     line-height: 3rem;
     font-weight: 100;
@@ -62,10 +64,13 @@ header {
   nav ul {
     display: block;
     margin: 20px auto;
+    padding: 0;
 
     li {
       display: block;
       margin: 0 0.3rem 0.3rem;
+      padding: 0;
+      list-style: none;
 
       a {
         display: block;
@@ -110,9 +115,13 @@ footer {
 
   nav ul {
     display: block;
+    margin: 0;
+    padding: 0;
 
     li {
       margin: 0 auto 2rem;
+      padding: 0;
+      list-style: none;
 
       &:last-child:after {
         display: none;
@@ -148,7 +157,8 @@ footer {
     font-size: 0.8rem;
     line-height: 1rem;
     font-weight: 300;
-    margin-top: 3rem;
+    margin: 3rem 0 0;
+    padding: 0;
 
     a {
       text-decoration: none;
@@ -163,7 +173,7 @@ footer {
 button, .button {
   margin: 1rem auto;
   padding: 1rem 1.5rem;
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   border: none;
   border-radius: 3px;
   color: #fff;
