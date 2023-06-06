@@ -75,7 +75,7 @@ function createBasicRouteHandler(id: string, pathname: string) {
 const routes: Routes = {
   sitemap: {
     pattern: new URLPattern({ pathname: '/sitemap.xml' }),
-    handler: async (_request) => {
+    handler: async () => {
       const fileContents = await Deno.readTextFile(`public/sitemap.xml`);
 
       const oneDayInSeconds = 24 * 60 * 60;
@@ -90,7 +90,7 @@ const routes: Routes = {
   },
   robots: {
     pattern: new URLPattern({ pathname: '/robots.txt' }),
-    handler: async (_request) => {
+    handler: async () => {
       const fileContents = await Deno.readTextFile(`public/robots.txt`);
 
       const oneDayInSeconds = 24 * 60 * 60;
@@ -103,6 +103,12 @@ const routes: Routes = {
       });
     },
   },
+  favicon: {
+    pattern: new URLPattern({ pathname: '/favicon.ico' }),
+    handler: (request) => {
+      return serveFile(request, 'public/images/favicon.ico');
+    },
+  },
   public: {
     pattern: new URLPattern({ pathname: '/public/:filePath*' }),
     handler: (request, match) => {
@@ -111,7 +117,7 @@ const routes: Routes = {
       try {
         const fullFilePath = `public/${filePath}`;
 
-        const fileExtension = filePath.split('.').pop()?.toLowerCase();
+        const fileExtension = filePath!.split('.').pop()?.toLowerCase();
 
         if (fileExtension === 'ts') {
           return serveFileWithTs(request, fullFilePath);
@@ -140,7 +146,7 @@ const routes: Routes = {
   reactWithInitialCount: createBasicRouteHandler('react', '/react/:count'),
   api_v0_random_positive_int: {
     pattern: new URLPattern({ pathname: '/api/v0/random-positive-int' }),
-    handler: (_request) => {
+    handler: () => {
       const number = generateRandomPositiveInt();
 
       return new Response(JSON.stringify({ number }), {

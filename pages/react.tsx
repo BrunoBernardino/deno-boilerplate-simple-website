@@ -11,7 +11,7 @@ export function pageAction() {
 export const counterId = 'counter-container';
 
 export function pageContent(_request: Request, match: URLPatternResult) {
-  const initialCounterValue = parseInt(match.pathname.groups.count, 10) || 0;
+  const initialCounterValue = Number(match.pathname.groups.count || '0');
 
   const counterReactNode = <Counter initialValue={initialCounterValue} />;
 
@@ -31,7 +31,7 @@ export function pageContent(_request: Request, match: URLPatternResult) {
       <section id="${counterId}">${counterHtml}</section>
     </section>
     
-    <script src="https://unpkg.com/@babel/standalone@7.20.15/babel.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.22.4/babel.min.js"></script>
     <script src="https://unpkg.com/react@18.2.0/umd/react.production.min.js" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/react-dom@18.2.0/umd/react-dom.production.min.js" crossorigin="anonymous"></script>
     <script type="text/babel">
