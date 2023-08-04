@@ -1,4 +1,3 @@
-import { serve } from 'std/http/server.ts';
 import routes, { Route } from './routes.ts';
 
 function handler(request: Request) {
@@ -22,4 +21,4 @@ export const abortController = new AbortController();
 
 const PORT = Deno.env.get('PORT') || 8000;
 
-serve(handler, { port: PORT as number, signal: abortController.signal });
+Deno.serve({ port: PORT as number, signal: abortController.signal }, handler);
