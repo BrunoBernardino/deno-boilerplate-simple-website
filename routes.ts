@@ -7,6 +7,22 @@ import {
   serveFileWithTs,
 } from './lib/utils.ts';
 
+// NOTE: This won't be necessary once https://github.com/denoland/deploy_feedback/issues/433 is closed
+import * as indexPage from './pages/index.ts';
+import * as ssrPage from './pages/ssr.ts';
+import * as dynamicPage from './pages/dynamic.ts';
+import * as formPage from './pages/form.ts';
+import * as webComponentPage from './pages/web-component.ts';
+import * as reactPage from './pages/react.tsx';
+const pages = {
+  index: indexPage,
+  ssr: ssrPage,
+  dynamic: dynamicPage,
+  form: formPage,
+  webComponent: webComponentPage,
+  react: reactPage,
+};
+
 export interface Route {
   pattern: URLPattern;
   handler: (
@@ -29,12 +45,16 @@ interface Page {
   pageAction: PageFunction;
 }
 
-function createBasicRouteHandler(id: string, pathname: string, isReact = false) {
+function createBasicRouteHandler(id: string, pathname: string) {
   return {
     pattern: new URLPattern({ pathname }),
     handler: async (request: Request, match: URLPatternResult) => {
       try {
-        const { pageContent, pageAction }: Page = await import(`./pages/${id}.ts${isReact ? 'x' : ''}`);
+        // NOTE: Use this instead once https://github.com/denoland/deploy_feedback/issues/433 is closed
+        // const { pageContent, pageAction }: Page = await import(`./pages/${id}.ts`);
+
+        // @ts-ignore necessary because of the comment above
+        const { pageContent, pageAction }: Page = pages[id];
 
         if (request.method !== 'GET') {
           return pageAction(request, match) as Response;
@@ -131,9 +151,9 @@ const routes: Routes = {
   ssr: createBasicRouteHandler('ssr', '/ssr'),
   dynamic: createBasicRouteHandler('dynamic', '/dynamic'),
   form: createBasicRouteHandler('form', '/form'),
-  webComponent: createBasicRouteHandler('web-component', '/web-component'),
-  react: createBasicRouteHandler('react', '/react', true),
-  reactWithInitialCount: createBasicRouteHandler('react', '/react/:count', true),
+  webComponent: createBasicRouteHandler('webComponent', '/web-component'),
+  react: createBasicRouteHandler('react', '/react'),
+  reactWithInitialCount: createBasicRouteHandler('react', '/react/:count'),
   api_v0_random_positive_int: {
     pattern: new URLPattern({ pathname: '/api/v0/random-positive-int' }),
     handler: () => {
