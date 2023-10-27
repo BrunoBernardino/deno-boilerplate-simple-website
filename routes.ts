@@ -7,6 +7,8 @@ import {
   serveFileWithTs,
 } from './lib/utils.ts';
 
+import * as notFoundPage from './pages/404.ts';
+
 // NOTE: This won't be necessary once https://github.com/denoland/deploy_feedback/issues/433 is closed
 import * as indexPage from './pages/index.ts';
 import * as ssrPage from './pages/ssr.ts';
@@ -66,12 +68,14 @@ function createBasicRouteHandler(id: string, pathname: string) {
           return pageContentResult;
         }
 
-        const { htmlContent: htmlContent, titlePrefix } = pageContentResult as PageContentResult;
+        const { htmlContent, titlePrefix } = pageContentResult as PageContentResult;
 
         return basicLayoutResponse(htmlContent, { currentPath: match.pathname.input, titlePrefix });
       } catch (error) {
         if (error.toString().includes('NotFound')) {
-          return new Response('Not Found', { status: 404 });
+          const { htmlContent, titlePrefix } = notFoundPage.pageContent();
+
+          return basicLayoutResponse(htmlContent, { titlePrefix, currentPath: match.pathname.input }, 404);
         }
 
         console.error(error);

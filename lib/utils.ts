@@ -63,7 +63,7 @@ function basicLayout(htmlContent: string, { currentPath, titlePrefix, descriptio
     `;
 }
 
-export function basicLayoutResponse(htmlContent: string, options: BasicLayoutOptions) {
+export function basicLayoutResponse(htmlContent: string, options: BasicLayoutOptions, status?: number) {
   return new Response(basicLayout(htmlContent, options), {
     headers: {
       'content-type': 'text/html; charset=utf-8',
@@ -71,6 +71,7 @@ export function basicLayoutResponse(htmlContent: string, options: BasicLayoutOpt
         `default-src 'self'; child-src 'none'; img-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'  https://unpkg.com/@babel/standalone@7.22.4/babel.min.js https://unpkg.com/react@18.2.0/umd/react.production.min.js https://unpkg.com/react-dom@18.2.0/umd/react-dom.production.min.js;`,
       'x-frame-options': 'DENY',
     },
+    status,
   });
 }
 

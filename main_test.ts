@@ -22,7 +22,7 @@ Deno.test({
     assertEquals(response.status, 404);
 
     responseText = await response.text();
-    assertEquals(responseText, 'Not Found');
+    assertEquals(responseText.includes('Not Found'), true);
 
     abortController.abort('Test finished');
   },

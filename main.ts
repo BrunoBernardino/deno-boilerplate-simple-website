@@ -1,4 +1,6 @@
 import routes, { Route } from './routes.ts';
+import * as notFoundPage from './pages/404.ts';
+import { basicLayoutResponse } from './lib/utils.ts';
 
 function handler(request: Request) {
   const routeKeys = Object.keys(routes);
@@ -12,9 +14,9 @@ function handler(request: Request) {
     }
   }
 
-  return new Response('Not Found', {
-    status: 404,
-  });
+  const { htmlContent, titlePrefix } = notFoundPage.pageContent();
+
+  return basicLayoutResponse(htmlContent, { titlePrefix, currentPath: '/' }, 404);
 }
 
 export const abortController = new AbortController();
