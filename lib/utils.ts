@@ -1,5 +1,5 @@
 import { serveFile } from 'std/http/file_server.ts';
-import { emit } from 'https://deno.land/x/emit@0.15.0/mod.ts';
+import { transpile } from 'https://deno.land/x/emit@0.33.0/mod.ts';
 import sass from 'https://deno.land/x/denosass@1.0.6/mod.ts';
 
 import header from '/components/header.ts';
@@ -68,7 +68,7 @@ export function basicLayoutResponse(htmlContent: string, options: BasicLayoutOpt
     headers: {
       'content-type': 'text/html; charset=utf-8',
       'content-security-policy':
-        `default-src 'self'; child-src 'none'; img-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'  https://unpkg.com/@babel/standalone@7.22.4/babel.min.js https://unpkg.com/react@18.2.0/umd/react.production.min.js https://unpkg.com/react-dom@18.2.0/umd/react-dom.production.min.js;`,
+        `default-src 'self'; child-src 'none'; img-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'  https://unpkg.com/@babel/standalone@7.23.8/babel.min.js https://unpkg.com/react@18.2.0/umd/react.production.min.js https://unpkg.com/react-dom@18.2.0/umd/react-dom.production.min.js;`,
       'x-frame-options': 'DENY',
     },
     status,
@@ -81,7 +81,7 @@ export function isRunningLocally(urlPatternResult: URLPatternResult) {
 
 export function escapeHtml(unsafe: string) {
   return unsafe.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;')
-    .replaceAll('\'', '&#039;');
+    .replaceAll("'", '&#039;');
 }
 
 export function generateRandomPositiveInt(max = 10000) {
@@ -90,7 +90,7 @@ export function generateRandomPositiveInt(max = 10000) {
 
 async function transpileTs(content: string, specifier: URL) {
   const urlStr = specifier.toString();
-  const result = await emit(specifier, {
+  const result = await transpile(specifier, {
     load(specifier: string) {
       if (specifier !== urlStr) {
         return Promise.resolve({ kind: 'module', specifier, content: '' });
@@ -98,7 +98,7 @@ async function transpileTs(content: string, specifier: URL) {
       return Promise.resolve({ kind: 'module', specifier, content });
     },
   });
-  return result[urlStr];
+  return result.get(urlStr) || '';
 }
 
 export async function serveFileWithTs(request: Request, filePath: string, extraHeaders?: ResponseInit['headers']) {
