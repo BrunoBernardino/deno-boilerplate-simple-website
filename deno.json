@@ -10,7 +10,8 @@
     "rules": {
       "exclude": [
         "no-window-prefix",
-        "no-window"
+        "no-window",
+        "no-unused-vars"
       ]
     }
   },

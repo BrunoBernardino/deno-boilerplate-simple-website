@@ -1,4 +1,4 @@
-import { serveFile } from 'std/http/file_server.ts';
+import { serveFile } from 'std/http/file-server';
 import {
   basicLayoutResponse,
   generateRandomPositiveInt,
