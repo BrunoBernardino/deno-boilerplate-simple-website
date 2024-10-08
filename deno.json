@@ -26,6 +26,18 @@
       "deno.ns"
     ]
   },
-  "importMap": "./import_map.json",
-  "lock": false
+  "lock": false,
+  "imports": {
+    "/": "./",
+    "./": "./",
+
+    "react": "https://esm.sh/react@18.3.1",
+    "react/": "https://esm.sh/react@18.3.1/",
+    "react-dom": "https://esm.sh/react-dom@18.3.1",
+    "react-dom/": "https://esm.sh/react-dom@18.3.1/",
+
+    "std/assert/equals": "jsr:@std/assert@1.0.6/equals",
+    "std/http/file-server": "jsr:@std/http@1.0.7/file-server",
+    "deno/emit": "jsr:@deno/emit@0.45.0"
+  }
 }
