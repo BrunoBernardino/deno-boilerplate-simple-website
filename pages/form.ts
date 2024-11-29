@@ -22,7 +22,7 @@ export async function pageAction(request: Request, match: URLPatternResult) {
       throw new Error('The random value needs to have "something" in it');
     }
   } catch (error) {
-    errorMessage = error.toString();
+    errorMessage = error instanceof Error ? error.toString() : 'Unknown error';
   }
 
   const errorHtml = errorMessage

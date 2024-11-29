@@ -55,8 +55,7 @@ function createBasicRouteHandler(id: string, pathname: string) {
         // NOTE: Use this instead once https://github.com/denoland/deploy_feedback/issues/433 is closed
         // const { pageContent, pageAction }: Page = await import(`./pages/${id}.ts`);
 
-        // @ts-ignore necessary because of the comment above
-        const { pageContent, pageAction }: Page = pages[id];
+        const { pageContent, pageAction }: Page = pages[id as keyof typeof pages];
 
         if (request.method !== 'GET') {
           return pageAction(request, match) as Response;
@@ -72,7 +71,7 @@ function createBasicRouteHandler(id: string, pathname: string) {
 
         return basicLayoutResponse(htmlContent, { currentPath: match.pathname.input, titlePrefix });
       } catch (error) {
-        if (error.toString().includes('NotFound')) {
+        if ((error instanceof Error) && error.toString().includes('NotFound')) {
           const { htmlContent, titlePrefix } = notFoundPage.pageContent();
 
           return basicLayoutResponse(htmlContent, { titlePrefix, currentPath: match.pathname.input }, 404);
@@ -141,7 +140,7 @@ const routes: Routes = {
         response.headers.set('cache-control', `max-age=${oneDayInSeconds}, public`);
         return response;
       } catch (error) {
-        if (error.toString().includes('NotFound')) {
+        if ((error instanceof Error) && error.toString().includes('NotFound')) {
           return new Response('Not Found', { status: 404 });
         }
 

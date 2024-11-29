@@ -13,8 +13,18 @@
 
 html,
 body {
-  font: 16px/16px 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell',
-    'Fira Sans', 'Droid Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font:
+    16px/16px 'Segoe UI',
+    'Roboto',
+    'Oxygen',
+    'Ubuntu',
+    'Cantarell',
+    'Fira Sans',
+    'Droid Sans',
+    'Helvetica Neue',
+    Helvetica,
+    Arial,
+    sans-serif;
   background: var(--color-background);
   background-size: cover;
   color: var(--color-text);
@@ -84,12 +94,12 @@ header {
         color: var(--color-link-hover);
       }
 
-      @media only screen and (min-width : 600px) {
+      @media only screen and (min-width: 600px) {
         margin: 0 0.3rem;
       }
     }
 
-    @media only screen and (min-width : 600px) {
+    @media only screen and (min-width: 600px) {
       display: flex;
       flex: 1;
       flex-wrap: nowrap;
@@ -98,7 +108,7 @@ header {
     }
   }
 
-  @media only screen and (min-width : 600px) {
+  @media only screen and (min-width: 600px) {
     display: flex;
     flex: 1;
     flex-wrap: nowrap;
@@ -132,9 +142,9 @@ footer {
         font-weight: bold;
       }
 
-      @media only screen and (min-width : 600px) {
+      @media only screen and (min-width: 600px) {
         margin: 0 0 1rem;
-      
+
         &:after {
           content: '/';
           display: inline-block;
@@ -144,7 +154,7 @@ footer {
       }
     }
 
-    @media only screen and (min-width : 600px) {
+    @media only screen and (min-width: 600px) {
       display: flex;
       flex: 1;
       flex-wrap: nowrap;
@@ -164,7 +174,7 @@ footer {
       text-decoration: none;
     }
 
-    @media only screen and (min-width : 600px) {
+    @media only screen and (min-width: 600px) {
       margin-top: 1rem;
     }
   }
@@ -196,7 +206,7 @@ fieldset {
   transition: all 100ms ease-in-out;
   box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
 
-  &> label {
+  & > label {
     font-size: 1rem;
     display: block;
     margin-bottom: 0.5rem;
@@ -208,15 +218,15 @@ fieldset {
     }
   }
 
-  input[type="text"],
-  input[type="date"],
-  input[type="datetime"],
-  input[type="email"],
-  input[type="number"],
-  input[type="search"],
-  input[type="time"],
-  input[type="url"],
-  input[type="password"],
+  input[type='text'],
+  input[type='date'],
+  input[type='datetime'],
+  input[type='email'],
+  input[type='number'],
+  input[type='search'],
+  input[type='time'],
+  input[type='url'],
+  input[type='password'],
   textarea,
   select {
     box-sizing: border-box;
@@ -261,7 +271,7 @@ fieldset {
 
   svg path, svg rect {
     fill: rgba(0, 0, 0, 0.8);
-    filter: drop-shadow( 0 0 5px #000);
+    filter: drop-shadow(0 0 5px #000);
   }
 
   &.hide {
@@ -279,7 +289,7 @@ fieldset {
   border-bottom: 3px solid rgb(161, 0, 0);
   color: var(--color-text);
   background-image: linear-gradient(rgb(255, 166, 166), #faa);
-  box-shadow: 0 5px 10px rgba(0, 0, 0, .3);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
 
   h3, p {
     font-size: 1.1rem;
@@ -315,7 +325,7 @@ fieldset {
     line-height: 1.7rem;
     margin-bottom: 1rem;
   }
-  
+
   &:last-of-type {
     border: none;
   }
