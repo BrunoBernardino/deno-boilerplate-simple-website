@@ -22,7 +22,7 @@ It does include some examples for building complex apps, like:
 6. React with SSR and hydration in `/react` (and `/react/5`, for example)
 7. Also, if you want to see things like Google Sign-in or GitHub Sign-in, running PostgreSQL database migrations, filling PDFs, sending emails with attachments, dynamic sitemaps, or uploading files to AWS S3, I've also published a [Deno Code Examples repo](https://github.com/BrunoBernardino/deno-code-examples).
 
-You can build pretty complex and complicated things without frameworks or loads of dependencies, but if you need a framework, I'd suggest you try [fresh](https://fresh.deno.dev/), [Snel](https://crewdevio.mod.land/projects/Snel), or [Aleph](https://github.com/alephjs/aleph.js) to still be able to enjoy a lot of Deno. They're pretty nice.
+You can build pretty complex and complicated things without frameworks or loads of dependencies, but if you need a framework, I'd suggest you try [fresh](https://fresh.deno.dev/) to still be able to enjoy a lot of Deno. It's pretty nice.
 
 ## Requirements
 
