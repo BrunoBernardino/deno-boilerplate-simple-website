@@ -68,7 +68,7 @@ export function basicLayoutResponse(htmlContent: string, options: BasicLayoutOpt
     headers: {
       'content-type': 'text/html; charset=utf-8',
       'content-security-policy':
-        `default-src 'self'; child-src 'none'; img-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'  https://unpkg.com/@babel/standalone@7.24.7/babel.min.js https://unpkg.com/react@18.3.1/umd/react.production.min.js https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js;`,
+        `default-src 'self'; child-src 'none'; img-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' https://unpkg.com/@babel/standalone@7.26.9/babel.min.js https://unpkg.com/react@18.3.1/umd/react.production.min.js https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js;`,
       'x-frame-options': 'DENY',
     },
     status,

@@ -31,7 +31,7 @@ export function pageContent(_request: Request, match: URLPatternResult) {
       <section id="${counterId}">${counterHtml}</section>
     </section>
     
-    <script src="https://unpkg.com/@babel/standalone@7.24.7/babel.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.26.9/babel.min.js"></script>
     <script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js" crossorigin="anonymous"></script>
     <script type="text/babel">
