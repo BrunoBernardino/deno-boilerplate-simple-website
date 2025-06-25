@@ -27,19 +27,19 @@ export async function pageAction(request: Request, match: URLPatternResult) {
 
   const errorHtml = errorMessage
     ? html`
-    <section class="error">
-      <h3>Error!</h3>
-      <p>${errorMessage}</p>
-    </section>
-  `
+      <section class="error">
+        <h3>Error!</h3>
+        <p>${errorMessage}</p>
+      </section>
+    `
     : '';
   const successHtml = !errorMessage
     ? html`
-    <section class="success">
-      <h3>Success!</h3>
-      <p>You submitted "${escapeHtml(submittedRandomValue)}" successfully.</p>
-    </section>
-  `
+      <section class="success">
+        <h3>Success!</h3>
+        <p>You submitted "${escapeHtml(submittedRandomValue)}" successfully.</p>
+      </section>
+    `
     : '';
 
   const htmlContent = generateHtmlContent(errorHtml || successHtml, errorMessage ? submittedRandomValue : '');
@@ -75,9 +75,9 @@ function generateHtmlContent(notificationHtml = '', randomValue = '') {
       <form action="/form" method="POST">
         <fieldset>
           <label for="random-value">Random Value</label>
-          <input id="random-value" name="random-value" type="text" placeholder="something" value="${
-    escapeHtml(randomValue)
-  }" />
+          <input id="random-value" name="random-value" type="text" placeholder="something" value="${escapeHtml(
+      randomValue,
+    )}" />
         </fieldset>
         <button type="submit">Submit it!</button>
       </form>

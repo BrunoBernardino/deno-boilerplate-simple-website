@@ -10,7 +10,9 @@ export function pageContent() {
       <h1 class="main-title">
         404 - Not Found
       </h1>
-      <p style="text-align: center; margin-top: 3rem;">The page you are looking for does not exist. <a href="/">Go home</a>.</p>
+      <p style="text-align: center; margin-top: 3rem;">
+        The page you are looking for does not exist. <a href="/">Go home</a>.
+      </p>
     </section>
   `;
 

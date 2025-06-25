@@ -15,19 +15,19 @@ export function pageContent() {
       <p>
         This is always built when requested, like all other pages, because Deno is generating/returning them!
       </p>
-      <p>The button starts as if having been clicked ${initialCounterValue} time${
-    initialCounterValue === 1 ? '' : 's'
-  }.</p>
+      <p>The button starts as if having been clicked ${initialCounterValue} time${initialCounterValue === 1
+      ? ''
+      : 's'}.</p>
       <button id="counter-button">
         This button has been clicked ${initialCounterValue} time${initialCounterValue === 1 ? '' : 's'}!
       </button>
     </section>
     <script type="text/javascript">
-      (() => {
-        document.addEventListener('app-loaded', () => {
-          window.app.setCounterButtonCounter(${initialCounterValue});
-        });
-      })();
+    (() => {
+      document.addEventListener('app-loaded', () => {
+        window.app.setCounterButtonCounter(${initialCounterValue});
+      });
+    })();
     </script>
   `;
 

@@ -20,7 +20,8 @@ function generateHtmlContent() {
         This page is dynamic (wooooo)!
       </h1>
       <p>
-        That means you can press the button to set its value to a random positive integer (up to 10000), fetched via an API route.
+        That means you can press the button to set its value to a random positive integer (up to 10000), fetched via an API
+        route.
       </p>
       <p>
         It uses vanilla JavaScript.
@@ -30,7 +31,7 @@ function generateHtmlContent() {
         Click me to get a random value!
       </button>
     </section>
-    
+
     <script src="/public/js/dynamic.js" defer></script>
   `;
 

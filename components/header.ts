@@ -5,7 +5,7 @@ export default function header(currentPath: string) {
     <header>
       <h1>
         <a href="/">
-          <img alt="Logo: Snail with stylized letters 'BRN'" src="/public/images/logo.svg" width="120" />
+          <img alt="A half-full circle" src="/public/images/logo.svg" width="50" />
         </a>
       </h1>
       <nav>

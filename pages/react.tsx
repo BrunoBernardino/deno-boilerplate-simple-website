@@ -25,21 +25,21 @@ export function pageContent(_request: Request, match: URLPatternResult) {
       <p>
         This is always built when requested, like all other pages, because Deno is generating/returning them!
       </p>
-      <p>The button starts as if having been clicked ${initialCounterValue} time${
-    initialCounterValue === 1 ? '' : 's'
-  }.</p>
+      <p>The button starts as if having been clicked ${initialCounterValue} time${initialCounterValue === 1
+      ? ''
+      : 's'}.</p>
       <section id="${counterId}">${counterHtml}</section>
     </section>
-    
-    <script src="https://unpkg.com/@babel/standalone@7.26.9/babel.min.js"></script>
-    <script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js" crossorigin="anonymous"></script>
-    <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js" crossorigin="anonymous"></script>
-    <script type="text/babel">
-      const { useState, useEffect } = React;
 
-      ${Counter.toString()}
+    <script type="module">
+    import React from 'https://esm.sh/react@19.1.0';
+    import ReactDOM from 'https://esm.sh/react-dom@19.1.0/client';
 
-      ReactDOM.hydrateRoot(document.getElementById('${counterId}'), <Counter initialValue={${initialCounterValue}} />);
+    const { useState, useEffect } = React; // These are imported in the Counter component directly, so they're needed here, too, as we only hydrate the function, not the file (this wouldn't be needed if we were importing a root "App" component, for example).
+
+    const Counter = ${Counter.toString()}
+
+    ReactDOM.hydrateRoot(document.getElementById('${counterId}'), React.createElement(Counter, { initialValue: ${initialCounterValue} }));
     </script>
   `;
 

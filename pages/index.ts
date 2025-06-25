@@ -11,8 +11,7 @@ export function pageContent() {
         Welcome to a Simple Deno Website Boilerplate!
       </h1>
       <p>
-        This is a simple boilerplate for a Deno website, deployed
-        with Deno Deploy.
+        This is a simple boilerplate for a Deno website, deployed with Deno Deploy.
       </p>
       <p>Click the button, have some fun.</p>
       <button id="counter-button">

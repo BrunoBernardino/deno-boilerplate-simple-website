@@ -32,35 +32,33 @@ function basicLayout(htmlContent: string, { currentPath, titlePrefix, descriptio
   }
 
   return html`
-    <!doctype html>
+    <!DOCTYPE html>
 
     <html lang="en">
-    <head>
-      <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-      <title>${title}</title>
-      <meta name="description" content="${description || defaultDescription}">
-      <meta name="author" content="Bruno Bernardino">
+        <title>${title}</title>
+        <meta name="description" content="${description || defaultDescription}">
+        <meta name="author" content="Bruno Bernardino">
 
-      <link rel="icon" href="/public/images/favicon.png" type="image/png">
-      <link rel="apple-touch-icon" href="/public/images/favicon.png">
+        <link rel="icon" href="/public/images/favicon.png" type="image/png">
+        <link rel="apple-touch-icon" href="/public/images/favicon.png">
 
-      <link rel="stylesheet" href="/public/css/style.css">
-      <link rel="stylesheet" href="/public/scss/style.scss">
-    </head>
+        <link rel="stylesheet" href="/public/css/style.css">
+        <link rel="stylesheet" href="/public/scss/style.scss">
+      </head>
 
-    <body>
-      ${loading()}
-      <section class="wrapper">
-        ${header(currentPath)}
-        ${htmlContent}
-        ${footer()}
-      </section>
-      <script src="/public/js/script.js" defer></script>
-    </body>
+      <body>
+        ${loading()}
+        <section class="wrapper">
+          ${header(currentPath)} ${htmlContent} ${footer()}
+        </section>
+        <script src="/public/js/script.js" defer></script>
+      </body>
     </html>
-    `;
+  `;
 }
 
 export function basicLayoutResponse(htmlContent: string, options: BasicLayoutOptions, status?: number) {
@@ -68,7 +66,7 @@ export function basicLayoutResponse(htmlContent: string, options: BasicLayoutOpt
     headers: {
       'content-type': 'text/html; charset=utf-8',
       'content-security-policy':
-        `default-src 'self'; child-src 'none'; img-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' https://unpkg.com/@babel/standalone@7.26.9/babel.min.js https://unpkg.com/react@18.3.1/umd/react.production.min.js https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js;`,
+        `default-src 'self'; child-src 'none'; img-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' https://esm.sh;`,
       'x-frame-options': 'DENY',
     },
     status,
